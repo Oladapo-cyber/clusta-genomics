@@ -1,0 +1,7 @@
+{
+  "name": "Clusta Genomics",
+  "description": "A world-class molecular diagnostic and life science company website focused on precision genomics in Africa.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
