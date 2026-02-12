@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Microscope, Shield, Globe, Users, Heart, Target } from 'lucide-react';
 
 const About: React.FC = () => {
@@ -64,95 +65,20 @@ const About: React.FC = () => {
             </div>
           </div>
 
-          {/* Diagnostic Tests Showcase */}
-          <div className="bg-white rounded-3xl py-12 px-4 md:px-6">
-            <div className="text-center mb-12">
-              <h3 className="text-3xl font-bold mb-4">Explore Our Diagnostic Tests</h3>
-              <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                Discover our range of at-home diagnostic test kits. Click on any test to learn more on our diagnostics platform.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-              {/* HIV Test Card */}
-              <a 
-                href="https://clustadiagnostics.com/#:~:text=Popular,Test%20Kits" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="group bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer flex flex-col"
-              >
-                <div className="relative bg-gray-100 flex items-center justify-center">
-                  <img 
-                    src="/images/hiv-test.png" 
-                    alt="HIV Test Kit" 
-                    className="w-full h-auto object-cover"
-                  />
-                </div>
-                <div className="p-6 flex flex-col flex-grow">
-                  <h4 className="text-xl font-bold mb-3 text-gray-900">HIV</h4>
-                  <p className="text-gray-600 text-sm mb-6 leading-relaxed flex-grow">
-                    A confidential, at-home test that checks for HIV-1 and HIV-2 antibodies using a small drop of blood from a finger prick, with results in 15 minutes.
-                  </p>
-                  <button className="w-full bg-[#45aab8] text-white px-6 py-2 rounded-lg font-bold text-sm uppercase tracking-wide hover:bg-slate-900 transition-all shadow-md hover:shadow-lg">Add to Cart</button>
-                </div>
-              </a>
-
-              {/* Malaria Test Card */}
-              <a 
-                href="https://clustadiagnostics.com/#:~:text=Popular,Test%20Kits" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="group bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer flex flex-col"
-              >
-                <div className="relative bg-gray-100 flex items-center justify-center">
-                  <img 
-                    src="/images/malaria-test.png" 
-                    alt="Malaria Test Kit" 
-                    className="w-full h-auto object-cover"
-                  />
-                </div>
-                <div className="p-6 flex flex-col flex-grow">
-                  <h4 className="text-xl font-bold mb-3 text-gray-900">Malaria</h4>
-                  <p className="text-gray-600 text-sm mb-6 leading-relaxed flex-grow">
-                    Stay ahead of malaria with a fast at-home test that delivers clear results in minutes.
-                  </p>
-                  <button className="w-full bg-[#45aab8] text-white px-6 py-2 rounded-lg font-bold text-sm uppercase tracking-wide hover:bg-slate-900 transition-all shadow-md hover:shadow-lg">Add to Cart</button>
-                </div>
-              </a>
-
-              {/* Hepatitis B Test Card */}
-              <a 
-                href="https://clustadiagnostics.com/#:~:text=Popular,Test%20Kits" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="group bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer flex flex-col"
-              >
-                <div className="relative bg-gray-100 flex items-center justify-center">
-                  <img 
-                    src="/images/hepatitis-b-test.png" 
-                    alt="Hepatitis B Test Kit" 
-                    className="w-full h-auto object-cover"
-                  />
-                </div>
-                <div className="p-6 flex flex-col flex-grow">
-                  <h4 className="text-xl font-bold mb-3 text-gray-900">Hepatitis B</h4>
-                  <p className="text-gray-600 text-sm mb-6 leading-relaxed flex-grow">
-                    An at-home rapid test that checks for Hepatitis B Surface Antigen (HBsAg) in a blood sample to detect infection.
-                  </p>
-                  <button className="w-full bg-[#45aab8] text-white px-6 py-2 rounded-lg font-bold text-sm uppercase tracking-wide hover:bg-slate-900 transition-all shadow-md hover:shadow-lg">Add to Cart</button>
-                </div>
-              </a>
-            </div>
-            
-            <div className="text-center mt-12">
-              <a 
-                href="https://clustadiagnostics.com/#:~:text=Popular,Test%20Kits" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-block bg-[#45aab8] text-white px-12 py-4 rounded-lg font-bold text-base uppercase tracking-widest hover:bg-slate-900 transition-all shadow-lg hover:shadow-xl"
-              >
-                Explore All Tests
-              </a>
+          <div className="py-24 bg-white">
+            <div className="max-w-5xl mx-auto px-4">
+              <div className="border-2 border-dashed border-slate-200 rounded-[2rem] p-12 md:p-16 text-center">
+                <h3 className="text-2xl font-black text-slate-900 mb-4 uppercase tracking-tight">Need a Custom Solution?</h3>
+                <p className="text-slate-500 mb-10 max-w-xl mx-auto leading-relaxed">
+                  Our research and development team can help you build custom panels or implement localized surveillance programs. Let's discuss your specific needs.
+                </p>
+                <Link
+                  to="/contact"
+                  className="inline-block bg-[#45aab8] text-white px-10 py-4 rounded-xl font-black text-xs uppercase tracking-[0.2em] shadow-lg hover:opacity-90 transition-all"
+                >
+                  Contact Specialist
+                </Link>
+              </div>
             </div>
           </div>
         </div>

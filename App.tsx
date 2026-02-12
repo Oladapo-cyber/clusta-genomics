@@ -61,9 +61,13 @@ const Navbar = () => {
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
             {navLinks.map((link) => {
-              const className = `text-[11px] xl:text-xs font-bold uppercase tracking-[0.15em] hover:text-[#45aab8] transition-colors ${
+              const isActive = location.pathname === link.path;
+              const baseText = `text-[11px] xl:text-xs font-bold uppercase tracking-[0.15em] hover:text-[#45aab8] transition-colors ${
                 !isLightText ? 'text-gray-700' : 'text-white/90'
-              } ${location.pathname === link.path ? 'text-[#45aab8] !opacity-100' : 'opacity-80'}`;
+              }`;
+              const activeText = isActive ? 'text-[#45aab8] !opacity-100' : 'opacity-80';
+              const underlineClasses = isActive ? 'underline decoration-[#58b3c0] decoration-2 underline-offset-4' : '';
+              const className = `${baseText} ${activeText} ${underlineClasses}`;
 
               return link.isExternal ? (
                 <a 
@@ -110,15 +114,19 @@ const Navbar = () => {
         isOpen ? 'max-h-screen opacity-100 py-8 border-b' : 'max-h-0 opacity-0 overflow-hidden'
       }`}>
         <div className="flex flex-col items-center space-y-6">
-          {navLinks.map((link) => (
-            link.isExternal ? (
+          {navLinks.map((link) => {
+            const isActive = location.pathname === link.path;
+            const mobileBase = 'text-sm font-bold uppercase tracking-widest';
+            const mobileActive = isActive ? 'text-[#45aab8]' : 'text-gray-800';
+
+            return link.isExternal ? (
               <a 
                 key={link.name}
                 href={link.path} 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 onClick={() => setIsOpen(false)}
-                className="text-sm font-bold text-gray-800 uppercase tracking-widest hover:text-[#45aab8] flex items-center gap-2"
+                className={`${mobileBase} ${mobileActive} hover:text-[#45aab8] flex items-center gap-2`}
               >
                 {link.name} <ExternalLink size={14} />
               </a>
@@ -127,12 +135,12 @@ const Navbar = () => {
                 key={link.name}
                 to={link.path}
                 onClick={() => setIsOpen(false)}
-                className="text-sm font-bold text-gray-800 uppercase tracking-widest hover:text-[#45aab8]"
+                className={`${mobileBase} ${mobileActive} hover:text-[#45aab8]`}
               >
                 {link.name}
               </Link>
-            )
-          ))}
+            );
+          })}
           <Link 
             to="/contact" 
             onClick={() => setIsOpen(false)}
@@ -217,17 +225,10 @@ const Footer = () => (
 );
 
 const ScrollToTop = () => {
-  const { pathname, hash } = useLocation();
+  const { pathname } = useLocation();
   useEffect(() => {
-    if (hash) {
-      const element = document.getElementById(hash.replace('#', ''));
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else {
-      window.scrollTo(0, 0);
-    }
-  }, [pathname, hash]);
+    window.scrollTo(0, 0);
+  }, [pathname]);
   return null;
 };
 

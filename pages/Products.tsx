@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Package, Search, LayoutGrid, HeartPulse, Microscope, 
@@ -43,6 +43,34 @@ const Products: React.FC = () => {
       ]
     }
   ];
+
+  // Diagnostic slider data and state
+  const productSlides = [
+    { title: 'HIV', img: '/images/hiv-test.png' },
+    { title: 'Malaria', img: '/images/malaria-test.png' },
+    { title: 'Hepatitis B', img: '/images/hepatitis-b-test.png' }
+  ];
+
+  const [slideIndex, setSlideIndex] = useState(0);
+  const [countdown, setCountdown] = useState(5);
+  const countdownRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    // start a 1s interval that counts down and advances slide when it reaches 0
+    countdownRef.current = window.setInterval(() => {
+      setCountdown(prev => {
+        if (prev <= 1) {
+          setSlideIndex(s => (s + 1) % productSlides.length);
+          return 5;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => {
+      if (countdownRef.current) window.clearInterval(countdownRef.current);
+    };
+  }, []);
 
   return (
     <div className="pt-24 min-h-screen bg-white">
@@ -284,17 +312,51 @@ const Products: React.FC = () => {
         </div>
       </section>
 
-      {/* Custom Solution Dashed Banner */}
-      <section className="py-24 bg-white">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="border-2 border-dashed border-slate-200 rounded-[2rem] p-12 md:p-16 text-center">
-            <h3 className="text-2xl font-black text-slate-900 mb-4 uppercase tracking-tight">Need a Custom Solution?</h3>
-            <p className="text-slate-500 mb-10 max-w-xl mx-auto leading-relaxed">
-              Our research and development team can help you build custom panels or implement localized surveillance programs. Let's discuss your specific needs.
+      {/* Diagnostic Tests Slider */}
+      <section className="py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold mb-4">Explore Our Diagnostic Tests</h3>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              Discover our range of at-home diagnostic test kits. Click on any test to learn more on our diagnostics platform.
             </p>
-            <Link to="/contact" className="inline-block bg-[#45aab8] text-white px-10 py-4 rounded-xl font-black text-xs uppercase tracking-[0.2em] shadow-lg hover:opacity-90 transition-all">
-              Contact Specialist
-            </Link>
+          </div>
+
+          <div className="h-[520px] bg-white relative overflow-hidden rounded-3xl">
+            <div
+              className="flex h-full transition-transform duration-700"
+              style={{ transform: `translateX(-${slideIndex * 100}%)` }}
+            >
+              {productSlides.map((s, i) => (
+                <div key={i} className="min-w-full h-full flex-shrink-0 relative">
+                  <img src={s.img} alt={s.title} className="w-full h-full object-cover rounded-3xl" />
+                  
+                </div>
+              ))}
+            </div>
+
+            {/* dots */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
+              {productSlides.map((_, i) => (
+                <button
+                  key={i}
+                  aria-label={`Go to slide ${i + 1}`}
+                  onClick={() => { setSlideIndex(i); setCountdown(5); }}
+                  className={`w-3 h-3 rounded-full transition-colors ${i === slideIndex ? 'bg-white' : 'bg-white/40'}`}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="text-center mt-12">
+            <a
+              href="https://clustadiagnostics.com/#:~:text=Popular,Test%20Kits"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-[#45aab8] text-white px-12 py-4 rounded-lg font-bold text-base uppercase tracking-widest hover:bg-slate-900 transition-all shadow-lg hover:shadow-xl"
+            >
+              Explore All Tests
+            </a>
           </div>
         </div>
       </section>
